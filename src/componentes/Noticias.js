@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Noticia from './Noticia';
 import PropTypes from 'prop-types';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 export default class Noticias extends Component {
 
@@ -11,12 +12,18 @@ export default class Noticias extends Component {
         return (
             
             <div className="row">
-                {noticias.map(noticia => ( 
-                    <Noticia
+               <TransitionGroup>
+               {noticias.map(noticia => ( 
+                   <CSSTransition
                         key = {noticia.url}
-                        noticia = {noticia} 
-                    />
+                        classNames = "fade"
+                        timeout = {500}
+                   >
+                       <Noticia noticia = {noticia} 
+                    /> 
+                   </CSSTransition>
                 ))}
+               </TransitionGroup>
             </div>
         );
     }
